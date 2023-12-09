@@ -1,5 +1,10 @@
 // import stuff
 import { LitElement, html, css } from 'lit';
+import "@lrnwebcomponents/simple-icon/lib/simple-icon-button-lite.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
+import "@lrnwebcomponents/hax-iconset/lib/simple-hax-iconset.js";
+
 
 export class TvChannel extends LitElement {
   // defaults

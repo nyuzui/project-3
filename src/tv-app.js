@@ -1,8 +1,16 @@
 // import stuff
 import { LitElement, html, css } from 'lit';
+import './tv-channel.js';
+
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import "./tv-channel.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icon-button-lite.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
+import "@lrnwebcomponents/hax-iconset/lib/simple-hax-iconset.js";
+
+
 
 export class TvApp extends LitElement {
   // defaults
@@ -64,7 +72,10 @@ export class TvApp extends LitElement {
       ${this.activeItem.name}
       ${this.activeItem.description}
         <!-- video -->
+        <youtube-video-player id="videoPlayer" src="https://www.youtube.com/watch?v=XsMFJT-Vna4"></youtube-video-player>
+
         <!-- discord / chat - optional -->
+
       </div>
       <!-- dialog -->
       <sl-dialog label="Dialog" class="dialog">
