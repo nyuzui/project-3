@@ -4,13 +4,14 @@ import './tv-channel.js';
 
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import "./tv-channel.js";
+import '@shoelace-style/shoelace/dist/components/input/input.js';
 import "@lrnwebcomponents/simple-icon/lib/simple-icon-button-lite.js";
 import "@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js";
 import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
 import "@lrnwebcomponents/hax-iconset/lib/simple-hax-iconset.js";
+import "@lrnwebcomponents/video-player/video-player.js";
 
-
+import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/button-group/button-group.js';
 
 export class TvApp extends LitElement {
   // defaults
@@ -42,11 +43,39 @@ export class TvApp extends LitElement {
   static get styles() {
     return [
       css`
-      :host {
-        display: block;
-        margin: 16px;
-        padding: 16px;
-      }
+        :host {
+          display: block;
+          margin: 16px;
+          padding: 16px;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+        }
+        .video-container {
+          padding: 20px;
+          width: 60%; /* Adjust width as needed */
+          height: 670px;
+          overflow: hidden;
+        }
+        .text-box {
+          margin-top: 16px;
+        }
+        .controls-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          overflow:hidden;
+          padding: 20px;
+          margin: 3px;
+        }
+        .button-container {
+          align-items: center;
+          padding: 20px;
+          width: 30%; /* Adjust width as needed */
+          height: 670px;
+          overflow: hidden;
+        }
       `
     ];
   }
@@ -68,20 +97,41 @@ export class TvApp extends LitElement {
           `
         )
       }
-      <div>
-      ${this.activeItem.name}
-      ${this.activeItem.description}
-        <!-- video -->
-        <youtube-video-player id="videoPlayer" src="https://www.youtube.com/watch?v=XsMFJT-Vna4"></youtube-video-player>
 
-        <!-- discord / chat - optional -->
+      <div class="container">
+        <div class="video-container">
+          <div>
+            ${this.activeItem.name}
+            ${this.activeItem.description}
+            <video-player id="video1" source="https://www.youtube.com/watch?v=XsMFJT-Vna4" accent-color="purple">
+            </video-player>
+          </div>
 
+          <div class="controls-container">
+            <sl-button variant="default" size="medium">Previous</sl-button>
+            <sl-button variant="default" size="medium">Next</sl-button>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <div>
+            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B1</sl-button>
+            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B2</sl-button>
+            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B3</sl-button>
+            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B4</sl-button>
+            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B5</sl-button>
+          </div>
+        </div>
       </div>
-      <!-- dialog -->
+        
+        
+
+      dialog 
       <sl-dialog label="Dialog" class="dialog">
-      ${this.activeItem.title}
+        ${this.activeItem.title}
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>
+   
     `;
   }
 
@@ -122,5 +172,6 @@ export class TvApp extends LitElement {
     });
   }
 }
+
 // tell the browser about our tag and class it should run when it sees it
 customElements.define(TvApp.tag, TvApp);

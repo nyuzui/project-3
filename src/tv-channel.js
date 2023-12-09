@@ -31,8 +31,9 @@ export class TvChannel extends LitElement {
         display: inline-flex;
       }
       .wrapper {
-        padding: 16px;
-        background-color: #eeeeee;
+        padding: 20px;
+        background-color: #adaaff;
+
       }
     `;
   }
