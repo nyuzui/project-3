@@ -13,16 +13,18 @@
         "indent": 0,
         "location": "hax-wp-killer.html",
         "slug": "hax-wp-killer",
-        "order": 0,
+        "order": 1,
         "parent": null,
-        "title": "HAX: Wordpress Killer",
+        "title": "TS1",
         "description": "The future we need, not the future we have.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
           "timecode": 0,
           "author":"Bryan Ollendyke",
           "created": 1697033522,
-          "updated": 1697034021
+          "updated": 1697034021,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=0s"
+
         }
       },
       {
@@ -30,16 +32,18 @@
         "indent": 0,
         "location": "hax-wp-killer.html",
         "slug": "hax-wp-killer",
-        "order": 0,
+        "order": 2,
         "parent": null,
-        "title": "HAX: sdffs sdsffsf",
+        "title": "TS2",
         "description": "The future we need, not the future we have.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
           "timecode": 0,
           "author":"Bryan Ollendyke",
           "created": 1697033522,
-          "updated": 1697034021
+          "updated": 1697034021,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=44s"
+
         }
       },
       {
@@ -47,16 +51,18 @@
         "indent": 0,
         "location": "this-is-water.html",
         "slug": "this-is-water",
-        "order": 0,
+        "order": 3,
         "parent": null,
-        "title": "This, is water",
+        "title": "TS3",
         "description": "What is water?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
           "author":"David Foster Wallace",
           "created": 1697033522,
-          "updated": 1697034021
+          "updated": 1697034021,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=78s"
+
         }
       }
       ,
@@ -65,16 +71,18 @@
         "indent": 0,
         "location": "this-is-water.html",
         "slug": "this-is-water",
-        "order": 0,
+        "order": 4,
         "parent": null,
-        "title": "This, is water",
+        "title": "TS4",
         "description": "What is water?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
           "author":"David Foster Wallace",
           "created": 1697033522,
-          "updated": 1697034021
+          "updated": 1697034021,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=165s"
+
         }
       }
       ,
@@ -83,16 +91,18 @@
         "indent": 0,
         "location": "this-is-water.html",
         "slug": "this-is-water",
-        "order": 0,
+        "order": 5,
         "parent": null,
-        "title": "This, is water",
+        "title": "TS5",
         "description": "What is water?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
           "author":"David Foster Wallace",
           "created": 1697033522,
-          "updated": 1697034021
+          "updated": 1697034021,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=238s"
+
         }
       }
     ]

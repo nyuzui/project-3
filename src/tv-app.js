@@ -1,4 +1,3 @@
-// import stuff
 import { LitElement, html, css } from 'lit';
 import './tv-channel.js';
 
@@ -26,10 +25,12 @@ export class TvApp extends LitElement {
       description: null,
     };
   }
+
   // convention I enjoy using to define the tag's name
   static get tag() {
     return 'tv-app';
   }
+
   // LitElement convention so we update render() when values change
   static get properties() {
     return {
@@ -39,6 +40,7 @@ export class TvApp extends LitElement {
       activeItem: { type: Object }
     };
   }
+
   // LitElement convention for applying styles JUST to our element
   static get styles() {
     return [
@@ -50,12 +52,18 @@ export class TvApp extends LitElement {
         }
         .container {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
         }
         .video-container {
           padding: 20px;
-          width: 60%; /* Adjust width as needed */
+          width: 50%;
           height: 670px;
+          overflow: hidden;
+        }
+        .container-2 {
+          display: flex;
+          flex-direction: column;
+          width: 50%;
           overflow: hidden;
         }
         .text-box {
@@ -65,73 +73,63 @@ export class TvApp extends LitElement {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          overflow:hidden;
+          overflow: hidden;
           padding: 20px;
           margin: 3px;
         }
-        .button-container {
-          align-items: center;
-          padding: 20px;
-          width: 30%; /* Adjust width as needed */
-          height: 670px;
-          overflow: hidden;
+        .lecture-info {
+          width: auto;
+          height: 350px;
+          font-size: 16px;
+          background-color: #eae0d5;
         }
       `
     ];
   }
+
   // LitElement rendering template of your element
   render() {
     return html`
-      <h2>${this.name}</h2>
-      ${
-        this.listings.map(
-          (item) => html`
-            <tv-channel
-              id="${item.id}"
-              title="${item.title}"
-              presenter="${item.metadata.author}"
-              description="${item.description}"
-              @click="${this.itemClick}"
-            >
-            </tv-channel>
-          `
-        )
-      }
-
+      <!-- VIDEO / BUTTON / INFO DIV -->
       <div class="container">
         <div class="video-container">
           <div>
             ${this.activeItem.name}
             ${this.activeItem.description}
-            <video-player id="video1" source="https://www.youtube.com/watch?v=XsMFJT-Vna4" accent-color="purple">
+            <video-player id="video1" source="https://www.youtube.com/watch?v=vwqi9s2XSG8" accent-color="#5e503f" dark track="https://haxtheweb.org/files/HAXshort.vtt">
             </video-player>
           </div>
 
           <div class="controls-container">
-            <sl-button variant="default" size="medium">Previous</sl-button>
-            <sl-button variant="default" size="medium">Next</sl-button>
+            <sl-button variant="default" size="large">Previous</sl-button>
+            <sl-button variant="default" size="large">Next</sl-button>
           </div>
+
+          <div class="lecture-info"></div>
         </div>
 
-        <div class="button-container">
-          <div>
-            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B1</sl-button>
-            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B2</sl-button>
-            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B3</sl-button>
-            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B4</sl-button>
-            <sl-button variant="default" size="medium" style="width: 100%; margin-bottom: 1rem;">B5</sl-button>
-          </div>
+        <!-- second container -->
+        <div class="container-2">
+          ${
+            this.listings.map(
+              (item) => html`
+                <tv-channel
+                  id="${item.id}"
+                  title="${item.title}"
+                  description="${item.description}"
+                  @click="${this.itemClick}"
+                >
+                </tv-channel>
+              `
+            )
+          }
         </div>
       </div>
-        
-        
 
-      dialog 
-      <sl-dialog label="Dialog" class="dialog">
+      <sl-dialog label="Lecture Information" class="dialog">
         ${this.activeItem.title}
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>
-   
     `;
   }
 
