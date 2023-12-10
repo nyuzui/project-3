@@ -21,7 +21,7 @@ export class TvChannel extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      presenter: { type: String },
+      order: { type: String },
       description: {type: String},
     };
   }
@@ -33,6 +33,7 @@ export class TvChannel extends LitElement {
         padding: 6px;
         flex-direction: column;
         float: right;
+        background-color: #C6AC8F;
 
       }
       .wrapper {
@@ -41,7 +42,8 @@ export class TvChannel extends LitElement {
         padding-left:5px;
         padding-right:5px;
          width: 300px;
-        background-color: #eae0d5;
+        background-color: #EAE0D5;
+        border-radius: 10px; 
       }
 
     `;
@@ -53,7 +55,7 @@ export class TvChannel extends LitElement {
     <div>
       <div class="wrapper">
         <h3>${this.title}</h3>
-        <h6>${this.presenter}</h6>
+        <h6>${this.order}</h6>
         <h6>${this.description}</h6>
         <slot></slot>
       </div> 

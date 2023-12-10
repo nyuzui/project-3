@@ -10,101 +10,116 @@
     "items": [
       {
         "id": "item-1",
-        "indent": 0,
-        "location": "hax-wp-killer.html",
-        "slug": "hax-wp-killer",
         "order": 1,
-        "parent": null,
         "title": "TS1",
-        "description": "The future we need, not the future we have.",
+        "description": "Introduction",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
           "timecode": 0,
-          "author":"Bryan Ollendyke",
-          "created": 1697033522,
-          "updated": 1697034021,
           "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=0s"
-
         }
       },
       {
-        "id": "item-3421",
-        "indent": 0,
-        "location": "hax-wp-killer.html",
-        "slug": "hax-wp-killer",
+        "id": "item-2",
         "order": 2,
-        "parent": null,
         "title": "TS2",
-        "description": "The future we need, not the future we have.",
+        "description": "Communication (or the lack of it)",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
           "timecode": 0,
-          "author":"Bryan Ollendyke",
-          "created": 1697033522,
-          "updated": 1697034021,
           "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=44s"
-
         }
       },
       {
-        "id": "item-2",
-        "indent": 0,
-        "location": "this-is-water.html",
-        "slug": "this-is-water",
+        "id": "item-3",
         "order": 3,
-        "parent": null,
         "title": "TS3",
-        "description": "What is water?",
+        "description": "A Woman’s Worth",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
-          "author":"David Foster Wallace",
-          "created": 1697033522,
-          "updated": 1697034021,
           "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=78s"
-
         }
       }
       ,
       {
-        "id": "item-2",
-        "indent": 0,
-        "location": "this-is-water.html",
-        "slug": "this-is-water",
+        "id": "item-4",
         "order": 4,
-        "parent": null,
         "title": "TS4",
-        "description": "What is water?",
+        "description": "Early Life/Early Death",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
-          "author":"David Foster Wallace",
-          "created": 1697033522,
-          "updated": 1697034021,
           "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=165s"
-
         }
-      }
-      ,
+      },
       {
-        "id": "item-2",
-        "indent": 0,
-        "location": "this-is-water.html",
-        "slug": "this-is-water",
+        "id": "item-5",
         "order": 5,
-        "parent": null,
         "title": "TS5",
-        "description": "What is water?",
+        "description": "Who Are You Calling A Peasant?",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
-          "author":"David Foster Wallace",
-          "created": 1697033522,
-          "updated": 1697034021,
-          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=238s"
-
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=s"
         }
-      }
+      },
+      {
+        "id": "item-6",
+        "order": 6,
+        "title": "TS6",
+        "description": "The Justice System",
+        "metadata": {
+          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
+          "timecode": 45,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=s"
+        }
+      },
+      {
+        "id": "item-7",
+        "order": 6,
+        "title": "TS7",
+        "description": "War – What It Isn’t Good For",
+        "metadata": {
+          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
+          "timecode": 45,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=s"
+        }
+      } 
+      ,{
+        "id": "item-8",
+        "order": 8,
+        "title": "TS8",
+        "description": "Poison",
+        "metadata": {
+          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
+          "timecode": 45,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=s"
+        }
+      } 
+      ,{
+        "id": "item-9",
+        "order": 9,
+        "title": "TS9",
+        "description": "PLACEHOLDER",
+        "metadata": {
+          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
+          "timecode": 45,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=s"
+        }
+      } 
+      ,{
+        "id": "item-10",
+        "indent": 0,
+        "order": 10,
+        "title": "TS10",
+        "description": "PLACEHOLDER",
+        "metadata": {
+          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
+          "timecode": 45,
+          "link": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t=s"
+        }
+      } 
     ]
   }
 }

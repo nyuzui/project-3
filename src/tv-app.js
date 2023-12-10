@@ -57,17 +57,18 @@ export class TvApp extends LitElement {
         .video-container {
           padding: 20px;
           width: 50%;
-          height: 670px;
+          height: auto;
           overflow: hidden;
+          background-color: #C6AC8F;
+          border-radius: 10px; 
+          margin: 16px;
         }
         .container-2 {
           display: flex;
           flex-direction: column;
-          width: 50%;
-          overflow: hidden;
-        }
-        .text-box {
-          margin-top: 16px;
+          overflow: auto;
+          border: 5px solid #C6AC8F; /* Optional: Add a border for visual clarity */
+          border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
         }
         .controls-container {
           display: flex;
@@ -83,6 +84,9 @@ export class TvApp extends LitElement {
           font-size: 16px;
           background-color: #eae0d5;
           padding:16px;
+          white-space: pre-line; 
+          border: 5px solid #C6AC8F; 
+          border-radius: 10px; 
         }
       `
     ];
@@ -95,10 +99,9 @@ export class TvApp extends LitElement {
       <div class="container">
         <div class="video-container">
           <div>
-            ${this.activeItem.name}
-            <video-player id="video1" source="https://www.youtube.com/watch?v=vwqi9s2XSG8" accent-color="#5e503f" dark track="https://haxtheweb.org/files/HAXshort.vtt">
+            <video-player id="video1" source="https://www.youtube.com/watch?v=vwqi9s2XSG8" accent-color="#C6AC8F" dark track="https://haxtheweb.org/files/HAXshort.vtt">
             </video-player>
-          </div>
+        </div>
 
           <div class="controls-container">
             <sl-button variant="default" size="large">Previous</sl-button>
@@ -106,6 +109,7 @@ export class TvApp extends LitElement {
           </div>
 
           <div class="lecture-info">
+         <h2> ${this.activeItem.title} </h2>
           ${this.activeItem.description}
           </div>
         </div>
