@@ -10,7 +10,7 @@ import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
 import "@lrnwebcomponents/hax-iconset/lib/simple-hax-iconset.js";
 import "@lrnwebcomponents/video-player/video-player.js";
 
-import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/button-group/button-group.js';
+// import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/button-group/button-group.js';
 
 export class TvApp extends LitElement {
   // defaults
@@ -82,6 +82,7 @@ export class TvApp extends LitElement {
           height: 350px;
           font-size: 16px;
           background-color: #eae0d5;
+          padding:16px;
         }
       `
     ];
@@ -95,7 +96,6 @@ export class TvApp extends LitElement {
         <div class="video-container">
           <div>
             ${this.activeItem.name}
-            ${this.activeItem.description}
             <video-player id="video1" source="https://www.youtube.com/watch?v=vwqi9s2XSG8" accent-color="#5e503f" dark track="https://haxtheweb.org/files/HAXshort.vtt">
             </video-player>
           </div>
@@ -105,7 +105,9 @@ export class TvApp extends LitElement {
             <sl-button variant="default" size="large">Next</sl-button>
           </div>
 
-          <div class="lecture-info"></div>
+          <div class="lecture-info">
+          ${this.activeItem.description}
+          </div>
         </div>
 
         <!-- second container -->
@@ -160,7 +162,6 @@ export class TvApp extends LitElement {
       }
     });
   }
-
   async updateSourceData(source) {
     await fetch(source).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
