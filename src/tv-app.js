@@ -72,6 +72,8 @@ export class TvApp extends LitElement {
           max-height: 700px;
           border: 5px solid #C6AC8F; /* Optional: Add a border for visual clarity */
           border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
+          background-image: linear-gradient(#C6AC8F, #EAE0D5);
+
         }
         .controls-container {
           display: flex;
@@ -138,7 +140,7 @@ export class TvApp extends LitElement {
 
       <sl-dialog label="Lecture Information" class="dialog">
         ${this.activeItem.title}
-        <sl-button slot="footer" @click="${this.dummyButtonClock}">Play video </sl-button>
+        <sl-button slot="footer" @click="${this.playVideo}">Play video </sl-button>
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>
     `;
