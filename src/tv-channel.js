@@ -1,4 +1,3 @@
-// tv-channel.js
 import { LitElement, html, css } from 'lit';
 import "@lrnwebcomponents/simple-icon/lib/simple-icon-button-lite.js";
 import "@lrnwebcomponents/simple-icon/lib/simple-icon-lite.js";
@@ -11,7 +10,8 @@ export class TvChannel extends LitElement {
   constructor() {
     super();
     this.title = '';
-    this.presenter = '';
+    this.description = '';
+    this.order = '';
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -21,8 +21,9 @@ export class TvChannel extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      order: { type: String },
       description: {type: String},
+      order: {type: Number},
+      selected: { type: Boolean },
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -30,20 +31,24 @@ export class TvChannel extends LitElement {
     return css`
       :host {
         display: block;
-        padding: 6px;
+        padding: 5px;
         flex-direction: column;
         float: right;
         background-color: #C6AC8F;
-
       }
+
+      :host([selected]) .wrapper {
+        background-color: #3498db;
+      }
+
       .wrapper {
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
         padding-left:5px;
         padding-right:5px;
          width: 300px;
-        background-color: #EAE0D5;
-        border-radius: 10px; 
+        background-image:linear-gradient( #EAE0D5, #ffffff);
+        border-radius: 5px; 
       }
 
     `;
@@ -55,8 +60,8 @@ export class TvChannel extends LitElement {
     <div>
       <div class="wrapper">
         <h3>${this.title}</h3>
-        <h6>${this.order}</h6>
         <h6>${this.description}</h6>
+        <h6>${this.order}</h6>
         <slot></slot>
       </div> 
     </div>  

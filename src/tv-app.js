@@ -1,3 +1,4 @@
+//tv-app.js
 import { LitElement, html, css } from 'lit';
 import './tv-channel.js';
 
@@ -59,14 +60,16 @@ export class TvApp extends LitElement {
           width: 50%;
           height: auto;
           overflow: hidden;
-          background-color: #C6AC8F;
+          background-image: linear-gradient(#C6AC8F, #EAE0D5);
+
           border-radius: 10px; 
           margin: 16px;
         }
         .container-2 {
           display: flex;
           flex-direction: column;
-          overflow: auto;
+          overflow-y: auto;
+          max-height: 700px;
           border: 5px solid #C6AC8F; /* Optional: Add a border for visual clarity */
           border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
         }
@@ -80,12 +83,11 @@ export class TvApp extends LitElement {
         }
         .lecture-info {
           width: auto;
-          height: 350px;
+          height: auto;
           font-size: 16px;
-          background-color: #eae0d5;
+          background-image:linear-gradient( #EAE0D5, #ffffff);
           padding:16px;
           white-space: pre-line; 
-          border: 5px solid #C6AC8F; 
           border-radius: 10px; 
         }
       `
@@ -96,6 +98,7 @@ export class TvApp extends LitElement {
   render() {
     return html`
       <!-- VIDEO / BUTTON / INFO DIV -->
+      <div>Awesome Final Project</div>
       <div class="container">
         <div class="video-container">
           <div>
@@ -104,13 +107,13 @@ export class TvApp extends LitElement {
         </div>
 
           <div class="controls-container">
-            <sl-button variant="default" size="large">Previous</sl-button>
-            <sl-button variant="default" size="large">Next</sl-button>
+          <sl-button variant="neutral" outline @click="${() => this.showPrevious(this.activeItem)}">Previous</sl-button>
+          <sl-button variant="neutral" outline @click="${() => this.showNext(this.activeItem)}">Next</sl-button>
           </div>
 
           <div class="lecture-info">
-         <h2> ${this.activeItem.title} </h2>
-          ${this.activeItem.description}
+           <h2> ${this.activeItem.title} </h2>
+           ${this.activeItem.description}
           </div>
         </div>
 
@@ -130,10 +133,12 @@ export class TvApp extends LitElement {
             )
           }
         </div>
+
       </div>
 
       <sl-dialog label="Lecture Information" class="dialog">
         ${this.activeItem.title}
+        <sl-button slot="footer" @click="${this.dummyButtonClock}">Play video </sl-button>
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
       </sl-dialog>
     `;
@@ -142,6 +147,10 @@ export class TvApp extends LitElement {
   closeDialog(e) {
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.hide();
+  }
+  // button that opens video from dialogue
+  dummyButtonClick() {
+
   }
 
   itemClick(e) {
@@ -174,7 +183,21 @@ export class TvApp extends LitElement {
       }
     });
   }
+
+  // next prev button wiring
+  showNext() {
+    const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
+    const nextIndex = (currentIndex + 1) % this.listings.length;
+    this.activeItem = this.listings[nextIndex];
+  }
+
+  showPrevious() {
+    const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
+    const previousIndex = (currentIndex - 1 + this.listings.length) % this.listings.length;
+    this.activeItem = this.listings[previousIndex];
+  }
 }
+
 
 // tell the browser about our tag and class it should run when it sees it
 customElements.define(TvApp.tag, TvApp);

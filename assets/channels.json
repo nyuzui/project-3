@@ -5,6 +5,7 @@
     "title": "EdTechJokerTV",
     "author": "EdTechJoker",
     "description": "A series of talks to learn about JSON and web standard communications",
+    "subtitles":"video subtitles",
     "license": "by-sa",
     "metadata": {},
     "items": [
@@ -13,6 +14,7 @@
         "order": 1,
         "title": "TS1",
         "description": "Introduction",
+        "subtitles":"Many people look at the Middle Ages through romantic eyes. They think about armored knights on lumbering steeds, beautiful damsels in pointy hats, dragons, chivalry and courtly love. Nothing could be further from the truth. For most people. The Middle Ages were dirty, difficult, and really quite dangerous. Let's find out now why it was unlikely that you could stay alive and prosper, and why you were likely to die quite quickly during that time.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
           "timecode": 0,
@@ -24,6 +26,7 @@
         "order": 2,
         "title": "TS2",
         "description": "Communication (or the lack of it)",
+        "subtitles":"Communication or the lack of it. Let's just suppose you suddenly arrived in medieval England that there was some sort of time slip, and now you were stranded in the middle of the 14th century. The first thing you would realize is that you wouldn't understand a damn thing anybody was saying. The ordinary people spoke Middle English, the posh people spoke French, and the clergy spoke church Latin, speaking only modern English. You might be able to understand the odd word, but an intelligible conversation with anybody is impossible at this point.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
           "timecode": 0,
@@ -35,6 +38,7 @@
         "order": 3,
         "title": "TS3",
         "description": "A Woman’s Worth",
+        "subtitles":"",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -47,6 +51,8 @@
         "order": 4,
         "title": "TS4",
         "description": "Early Life/Early Death",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -58,6 +64,8 @@
         "order": 5,
         "title": "TS5",
         "description": "Who Are You Calling A Peasant?",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -69,6 +77,8 @@
         "order": 6,
         "title": "TS6",
         "description": "The Justice System",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -80,6 +90,8 @@
         "order": 6,
         "title": "TS7",
         "description": "War – What It Isn’t Good For",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -91,6 +103,8 @@
         "order": 8,
         "title": "TS8",
         "description": "Poison",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -102,6 +116,8 @@
         "order": 9,
         "title": "TS9",
         "description": "PLACEHOLDER",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
@@ -114,6 +130,8 @@
         "order": 10,
         "title": "TS10",
         "description": "PLACEHOLDER",
+        "subtitles":"",
+
         "metadata": {
           "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
           "timecode": 45,
