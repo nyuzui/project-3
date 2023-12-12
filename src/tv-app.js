@@ -11,8 +11,6 @@ import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
 import "@lrnwebcomponents/hax-iconset/lib/simple-hax-iconset.js";
 import "@lrnwebcomponents/video-player/video-player.js";
 
-// import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/button-group/button-group.js';
-
 export class TvApp extends LitElement {
   // defaults
   constructor() {
@@ -24,6 +22,7 @@ export class TvApp extends LitElement {
       title: null,
       id: null,
       description: null,
+      metadata: {},
     };
   }
 
@@ -57,10 +56,10 @@ export class TvApp extends LitElement {
         }
         .video-container {
           padding: 20px;
-          width: 50%;
+          width: 60%;
           height: auto;
           overflow: hidden;
-          background-image: linear-gradient(#C6AC8F, #EAE0D5);
+          background-image:linear-gradient(#433a27,#756c4a);
 
           border-radius: 10px; 
           margin: 16px;
@@ -70,10 +69,8 @@ export class TvApp extends LitElement {
           flex-direction: column;
           overflow-y: auto;
           max-height: 700px;
-          border: 5px solid #C6AC8F; /* Optional: Add a border for visual clarity */
-          border-radius: 10px; /* Optional: Add rounded corners for aesthetics */
-          background-image: linear-gradient(#C6AC8F, #EAE0D5);
-
+          width: 40%;
+          border-radius: 10px;
         }
         .controls-container {
           display: flex;
@@ -87,10 +84,23 @@ export class TvApp extends LitElement {
           width: auto;
           height: auto;
           font-size: 16px;
-          background-image:linear-gradient( #EAE0D5, #ffffff);
-          padding:16px;
-          white-space: pre-line; 
+          background-image: linear-gradient(#a9b29e,#d5dbcf);
+          padding: 16px;
+          white-space: pre-line;
           border-radius: 10px; 
+        }
+        tv-channel.clicked {
+        border: 6px solid #d5dbcf;
+        padding: 0px;
+        box-sizing: border-box; 
+        border-radius: 15px;
+       }
+        tv-channel:hover {
+          cursor: pointer;
+          color: #433a27;
+        }
+        sl-button{
+          background-image: linear-gradient(#a9b29e,#d5dbcf);
         }
       `
     ];
@@ -100,22 +110,25 @@ export class TvApp extends LitElement {
   render() {
     return html`
       <!-- VIDEO / BUTTON / INFO DIV -->
-      <div>Awesome Final Project</div>
       <div class="container">
         <div class="video-container">
           <div>
-            <video-player id="video1" source="https://www.youtube.com/watch?v=vwqi9s2XSG8" accent-color="#C6AC8F" dark track="https://haxtheweb.org/files/HAXshort.vtt">
-            </video-player>
-        </div>
+            <video-player id="video1" 
+            source="https://www.youtube.com/watch?v=vwqi9s2XSG8" 
+            accent-color="#C6AC8F" 
+            dark track="https://haxtheweb.org/files/HAXshort.vtt"
+            @time-updated="${this.handleVideoTimeUpdate}">
+          </video-player>
+          </div>
 
           <div class="controls-container">
-          <sl-button variant="neutral" outline @click="${() => this.showPrevious(this.activeItem)}">Previous</sl-button>
-          <sl-button variant="neutral" outline @click="${() => this.showNext(this.activeItem)}">Next</sl-button>
+            <sl-button variant="neutral" outline @click="${() => this.showPrevious(this.activeItem)}">Previous</sl-button>
+            <sl-button variant="neutral" outline @click="${() => this.showNext(this.activeItem)}">Next</sl-button>
           </div>
 
           <div class="lecture-info">
-           <h2> ${this.activeItem.title} </h2>
-           ${this.activeItem.description}
+            <h2>${this.activeItem.title}</h2>
+            ${this.activeItem.description}
           </div>
         </div>
 
@@ -128,14 +141,17 @@ export class TvApp extends LitElement {
                   id="${item.id}"
                   title="${item.title}"
                   description="${item.description}"
-                  @click="${this.itemClick}"
+                  timestamp="${item.timestamp}"
+                  .timerange="${item.timerange}"  
+                  ?selected="${item.selected}"
+                  @tv-channel-clicked="${this.itemClick}"
+                  class="${this.activeItem.id === item.id ? 'clicked' : ''}"
                 >
                 </tv-channel>
               `
             )
           }
         </div>
-
       </div>
 
       <sl-dialog label="Lecture Information" class="dialog">
@@ -146,24 +162,44 @@ export class TvApp extends LitElement {
     `;
   }
 
-  closeDialog(e) {
+  closeDialog() {
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.hide();
   }
-  // button that opens video from dialogue
-  dummyButtonClick() {
-
-  }
 
   itemClick(e) {
-    console.log(e.target);
+    const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
+    if (previouslyClickedItem) {
+      previouslyClickedItem.classList.remove('clicked');
+    }
+  
+    e.target.classList.add('clicked');
+  
+    const clickedItem = this.listings.find((item) => item.id === e.target.id);
+  
     this.activeItem = {
-      title: e.target.title,
-      id: e.target.id,
-      description: e.target.description,
+      title: clickedItem.title,
+      id: clickedItem.id,
+      description: clickedItem.description,
+      metadata: clickedItem.metadata,
     };
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.show();
+  
+    this.timecode = clickedItem.metadata.timecode; // Update the timecode property
+  
+    this.updateVideoPlayer();
+  }
+
+  updateVideoPlayer() {
+    const videoPlayer = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player');
+
+    // Set the video source based on the active item's metadata
+    videoPlayer.source = this.activeItem.metadata.source;
+
+    // Play the video
+    videoPlayer.play();
+
+    // Seek to a specific time (e.g., the time specified in metadata)
+    videoPlayer.seek(this.activeItem.metadata.timecode);
   }
 
   // LitElement life cycle for when any property changes
@@ -177,29 +213,70 @@ export class TvApp extends LitElement {
       }
     });
   }
+
   async updateSourceData(source) {
     await fetch(source).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
         this.listings = [...responseData.data.items];
-        console.log(this.listings);
       }
     });
   }
+  
+  handleVideoTimeUpdate(e) {
+    const currentTime = e.detail.currentTime;
 
-  // next prev button wiring
+    // Find the channel with the corresponding time range
+    const activeChannel = this.listings.find((channel) => {
+      const [start, end] = channel.timerange;
+      return currentTime >= start && currentTime <= end;
+    });
+
+    if (activeChannel) {
+      this.activeItem = {
+        title: activeChannel.title,
+        id: activeChannel.id,
+        description: activeChannel.description,
+        metadata: activeChannel.metadata,
+      };
+    }
+  }
+
   showNext() {
     const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
     const nextIndex = (currentIndex + 1) % this.listings.length;
+    this.listings.forEach(item => item.selected = false); // Deselect all channels
+    this.listings[nextIndex].selected = true; // Select the next channel
     this.activeItem = this.listings[nextIndex];
+    this.updateVideoPlayer();
   }
 
   showPrevious() {
     const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
     const previousIndex = (currentIndex - 1 + this.listings.length) % this.listings.length;
+    this.listings.forEach(item => item.selected = false); // Deselect all channels
+    this.listings[previousIndex].selected = true; // Select the previous channel
     this.activeItem = this.listings[previousIndex];
+    this.updateVideoPlayer();
   }
+
+  
+
+  updateActiveItem(index) {
+    const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
+    if (previouslyClickedItem) {
+      previouslyClickedItem.classList.remove('clicked');
+    }
+
+    const newActiveItem = this.listings[index];
+    const newActiveItemElement = this.shadowRoot.querySelector([id="${newActiveItem.id}"]);
+
+    if (newActiveItemElement) {
+      newActiveItemElement.classList.add('clicked');
+    }
+
+    this.activeItem = newActiveItem;
+    this.updateVideoPlayer();
+  }
+
 }
-
-
-// tell the browser about our tag and class it should run when it sees it
 customElements.define(TvApp.tag, TvApp);
