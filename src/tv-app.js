@@ -68,7 +68,7 @@ export class TvApp extends LitElement {
           display: flex;
           flex-direction: column;
           overflow-y: auto;
-          max-height: 700px;
+          max-height: 900px;
           width: 40%;
           border-radius: 10px;
         }
@@ -90,7 +90,7 @@ export class TvApp extends LitElement {
           border-radius: 10px; 
         }
         tv-channel.clicked {
-        border: 6px solid #d5dbcf;
+        border: 10px solid #ffffff;
         padding: 0px;
         box-sizing: border-box; 
         border-radius: 15px;
@@ -110,6 +110,8 @@ export class TvApp extends LitElement {
   render() {
     return html`
       <!-- VIDEO / BUTTON / INFO DIV -->
+      
+      <section>
       <div class="container">
         <div class="video-container">
           <div>
@@ -144,6 +146,7 @@ export class TvApp extends LitElement {
                   timestamp="${item.timestamp}"
                   .timerange="${item.timerange}"  
                   ?selected="${item.selected}"
+                  .image="${item.metadata.image}"  
                   @tv-channel-clicked="${this.itemClick}"
                   class="${this.activeItem.id === item.id ? 'clicked' : ''}"
                 >
@@ -158,7 +161,7 @@ export class TvApp extends LitElement {
         ${this.activeItem.title}
         <sl-button slot="footer" @click="${this.playVideo}">Play video </sl-button>
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
-      </sl-dialog>
+      </sl-dialog></section>
     `;
   }
 

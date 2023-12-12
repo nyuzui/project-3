@@ -30,6 +30,7 @@ export class TvChannel extends LitElement {
       timestamp: { type: Number },
       timecode: { type: Number },
       timerange: { type: Array }, // Added timerange property
+      image: { type: String }, // Add image property to properties
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -41,7 +42,7 @@ export class TvChannel extends LitElement {
         flex-direction: column;
         float: right;
         background-color:#433a27;
-        transition: border 0.5s; // Add a transition for smooth effect
+        transition: border 0.5s; 
 
       }
       .wrapper {
@@ -52,6 +53,11 @@ export class TvChannel extends LitElement {
         width: auto;
         background-image: linear-gradient(#a9b29e,#d5dbcf);
         border-radius: 8px;
+        transition: height 0.5s; /* Add transition for height */
+
+      }
+      :host(.clicked) .wrapper {
+        height: 150px; /* Set the desired expanded height */
       }
 
     `;
@@ -60,16 +66,20 @@ export class TvChannel extends LitElement {
   // LitElement rendering template of your element
   render() {
     return html`
-    <div>
-      <div class="wrapper" @click="${this.handleClick}">
-        <h3>${this.title}</h3>
-        <h6>${this.description}</h6>
-        <slot></slot>
-      </div>
-    </div>  
- 
-      `;
+      <div>
+        <div class="wrapper" @click="${this.handleClick}">
+          <div style="display: flex; align-items: center;">
+            <div style="flex-grow: 1;">
+              <h3>${this.title}</h3>
+              <h6>${this.description}</h6>
+              <slot></slot>
+            </div>
+            <img src="${this.image}" alt="Channel Image" style="max-width: 50%; height: 100px; border-radius: 10px;">
+          </div>
+        </div>
+      </div>`;
   }
+  
 
   handleClick() {
     this.dispatchEvent(new CustomEvent('tv-channel-clicked', {
