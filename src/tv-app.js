@@ -115,12 +115,13 @@ export class TvApp extends LitElement {
       <div class="container">
         <div class="video-container">
           <div>
-            <video-player id="video1" 
-            source="https://www.youtube.com/watch?v=vwqi9s2XSG8" 
-            accent-color="#C6AC8F" 
+          <video-player id="videoPlayer"
+            source="https://www.youtube.com/watch?v=vwqi9s2XSG8"
+            accent-color="#C6AC8F"
             dark track="https://haxtheweb.org/files/HAXshort.vtt"
             @time-updated="${this.handleVideoTimeUpdate}">
           </video-player>
+
           </div>
 
           <div class="controls-container">
@@ -242,6 +243,12 @@ export class TvApp extends LitElement {
         metadata: activeChannel.metadata,
       };
     }
+    this.dispatchEvent(new CustomEvent('tv-channel-clicked', {
+      detail: {
+        metadata: this.metadata,
+      },
+    }));
+    
   }
 
   showNext() {
@@ -280,6 +287,19 @@ export class TvApp extends LitElement {
     this.activeItem = newActiveItem;
     this.updateVideoPlayer();
   }
-
+  firstUpdated() {
+    const videoPlayer = this.shadowRoot.getElementById('videoPlayer');
+  
+    this.addEventListener('tv-channel-clicked', (e) => {
+      const clickedMetadata = e.detail.metadata;
+      const activeChannel = this.listings.find((channel) => channel.metadata === clickedMetadata);
+  
+      if (activeChannel) {
+        this.selectChannel(activeChannel.id);
+        videoPlayer.seek(activeChannel.metadata.timecode);
+      }
+    });
+  }
+  
 }
 customElements.define(TvApp.tag, TvApp);
