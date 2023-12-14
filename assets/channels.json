@@ -14,12 +14,12 @@
         "order": 1,
         "title": "Introduction",
         "description": "TimeStamp 1",
-        "subtitles": "Many people look at the Middle Ages through romantic eyes. They think about armored knighTimeStamp  on lumbering steeds, beautiful damsels in pointy haTimeStamp , dragons, chivalry and courtly love. Nothing could be further from the truth. For most people. The Middle Ages were dirty, difficult, and really quite dangerous. Let's find out now why it was unlikely that you could stay alive and prosper, and why you were likely to die quite quickly during that time.",
+        "subtitles": "Many people look at the Middle Ages through romantic eyes. They think about armored knights on lumbering steeds, beautiful damsels in pointy hats, dragons, chivalry, and courtly love. Nothing could be further from the truth. For most people. The Middle Ages were dirty, difficult, and really quite dangerous. Let's find out now why it was unlikely that you could stay alive and prosper, and why you were likely to die quite quickly during that time.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
           "image": "https://www.messynessychic.com/wp-content/uploads/2019/03/grotesques-f.188v-1-930x493.jpg",
           "timecode": 0,
-          "timerange": [1, 42]
+          "end_time": 42
         },
         "timestamp": "0:00"
       },
@@ -33,7 +33,7 @@
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
           "image": "https://images.squarespace-cdn.com/content/v1/53a4b792e4b073bf214c0e66/a18c010f-39bc-4088-be63-3a8c8094e120/1663169959.jpg?format=1500w",
           "timecode": 44,
-          "timerange": [44, 77]
+          "end_time": 77
         },
         "timestamp": "0:44"
       },
@@ -47,7 +47,7 @@
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
           "image": "https://www.researchgate.net/profile/Anna-Kjellstroem-2/publication/235453371/figure/fig1/AS:299831487680518@1448496805585/A-medieval-painting-of-a-man-battering-a-woman-from-Comte-1978-p-74.png",
           "timecode": 78,
-          "timerange": [78, 164]
+          "end_time": 164
         },
         "timestamp": "1:18"
       },
@@ -59,9 +59,9 @@
         "subtitles": "",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
-          "image": "https://i.redd.it/%F0%9D%98%9B%F0%9D%98%A9%F0%9D%98%A6-%F0%9D%98%92%F0%9D%98%AA%F0%9D%98%AF%F0%9D%98%A8%F0%9D%98%B4-%F0%9D%98%8B%F0%9D%98%A6%F0%9D%98%A2%F0%9D%98%B5%F0%9D%98%A9-v0-rd119ldnjzn81.jpg?s=5975430ce05eba29f66805e8974fd0eca2f32ce9",
+          "image": "https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/BBO/OXCMS/BBO_OXCMS_MBBO_6-001.jpg",
           "timecode": 165,
-          "timerange": [165, 217]
+          "end_time": 217
         },
         "timestamp": "2:45"
       },
@@ -75,7 +75,7 @@
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
           "image": "https://www.worldhistory.org/img/r/p/1500x1500/9604.jpg.webp?v=1613873702",
           "timecode": 218,
-          "timerange": [218, 342]
+          "end_time": 342
         },
         "timestamp": "3:58"
       },
@@ -89,7 +89,7 @@
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
           "image": "https://julianharrison.typepad.com/.a/6a013488b55a86970c01b8d0f6dfab970c-pi",
           "timecode": 343,
-          "timerange": [343, 427]
+          "end_time": 427
         },
         "timestamp": "5:43"
       },
@@ -103,7 +103,7 @@
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
           "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_battle_of_Poitiers.jpg/450px-The_battle_of_Poitiers.jpg",
           "timecode": 428,
-          "timerange": [428, 552]
+          "end_time": 552
         },
         "timestamp": "7:08"
       },
@@ -115,38 +115,11 @@
         "subtitles": "",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
-          "image": "https://cdn.thecollector.com/wp-content/uploads/2020/12/de-morgan-love-potion-death-cleopatra-print.jpg?width=1200&quality=70",
+          "image": "https://cdn.thecollector.com/wp-content/uploads/2020/12/de-morgan-love-potion-death-cleopatra-print.jpg?width=1080&quality=70",
           "timecode": 553,
-          "timerange": [553, 703]
+          "end_time": 655
         },
         "timestamp": "9:13"
-      },
-      {
-        "id": "item9",
-        "order": 9,
-        "title": "PLACEHOLDER",
-        "description": "TimeStamp 9",
-        "subtitles": "",
-        "metadata": {
-          "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
-          "image": "https://www.messynessychic.com/wp-content/uploads/2019/03/grotesques-f.188v-1-930x493.jpg",
-          "timecode": 0,
-          "timerange": [81, 90]
-        }
-      },
-      {
-        "id": "item10",
-        "indent": 0,
-        "order": 10,
-        "title": "PLACEHOLDER",
-        "description": "TimeStamp 10",
-        "subtitles": "",
-        "metadata": {
-          "source": "https://www.youtube.com/watch?v=vwqi9s2XSG8&t",
-          "image": "https://www.messynessychic.com/wp-content/uploads/2019/03/grotesques-f.188v-1-930x493.jpg",
-          "timecode": 0,
-          "timerange": [91, 100]
-        }
       }
     ]
   }

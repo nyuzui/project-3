@@ -114,6 +114,7 @@ export class TvApp extends LitElement {
       <!-- VIDEO / BUTTON / INFO DIV -->
       
       <section>
+        <h3>double click everything</h3>
       <div class="container">
         <div class="video-container">
           <div>
@@ -121,8 +122,8 @@ export class TvApp extends LitElement {
             source="https://www.youtube.com/watch?v=vwqi9s2XSG8" 
             accent-color="#C6AC8F" 
             dark track="https://haxtheweb.org/files/HAXshort.vtt"
-            @time-updated="${this.handleVideoTimeUpdate}"
-            @click="${this.handleVideoClick}"> <!-- Added click event for video -->
+            @timeupdate="${this.handleVideoTimeUpdate}"
+            @click="${this.handleVideoClick}"> 
           </video-player>
           </div>
 
@@ -160,11 +161,11 @@ export class TvApp extends LitElement {
         </div>
       </div>
 
-      <sl-dialog label="Lecture Information" class="dialog">
+      <!-- <sl-dialog label="Lecture Information" class="dialog">
         ${this.activeItem.title}
         <sl-button slot="footer" @click="${this.playVideo}">Play video </sl-button>
         <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
-      </sl-dialog></section>
+      </sl-dialog></section> -->
     `;
   }
 
@@ -198,12 +199,12 @@ export class TvApp extends LitElement {
 }
 
 
-  updateVideoPlayer() {
-    const videoPlayer = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player');
-    videoPlayer.source = this.activeItem.metadata.source;
-    videoPlayer.play();
-    videoPlayer.seek(this.activeItem.metadata.timecode);
-  }
+updateVideoPlayer() {
+  const videoPlayer = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player');
+  videoPlayer.source = this.activeItem.metadata.source;
+  videoPlayer.play();
+  videoPlayer.seek(this.activeItem.metadata.timecode);
+}
 
   updated(changedProperties) {
     if (super.updated) {
@@ -242,31 +243,19 @@ export class TvApp extends LitElement {
   }
 
   handleVideoTimeUpdate(e) {
-    const currentTime = e.detail.currentTime;
-    const activeChannel = this.listings.find((channel) => {
-      const [start, end] = channel.timerange;
-      return currentTime >= start && currentTime <= end;
-    });
-
-    if (activeChannel) {
-      this.activeItem = {
-        title: activeChannel.title,
-        id: activeChannel.id,
-        description: activeChannel.description,
-        metadata: activeChannel.metadata,
-      };
-    }
+      this.updateActiveItemByTime();
   }
  
   handleVideoClick() {
     const videoPlayer = this.shadowRoot.querySelector('video-player');
-  
+
     if (videoPlayer.paused) {
       this.selectChannelByIndex(this.selectedIndex);
     } else {
       videoPlayer.pause();
     }
   }
+
   
   selectChannelByIndex(index) {
     this.listings.forEach(item => item.selected = false); 
@@ -294,6 +283,60 @@ export class TvApp extends LitElement {
     this.activeItem = this.listings[previousIndex];
     this.updateVideoPlayer();
     this.selectChannelByIndex(previousIndex);
+  }
+
+
+  seekToCurrentTime() {
+    const videoPlayer = this.shadowRoot.querySelector('video-player');
+    if (videoPlayer) {
+      const a11yMediaPlayer = videoPlayer.shadowRoot.querySelector('a11y-media-player');
+
+      if (a11yMediaPlayer) {
+        a11yMediaPlayer.seek(this.activeItem.metadata.timecode, this.activeItem.metadata.end_time);
+      }
+    }
+  }
+  updateActiveItemByTime() {
+    const currentTime = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector("a11y-media-player").media.currentTime;
+  
+    const itemId = (
+      (currentTime >= 0 && currentTime < 44 && 'item1') ||
+      (currentTime >= 45 && currentTime < 77 && 'item2') ||
+      (currentTime >= 78 && currentTime < 165 && 'item3') ||
+      (currentTime >= 166 && currentTime < 217 && 'item4') ||
+      (currentTime >= 218 && currentTime < 342 && 'item5') ||
+      (currentTime >= 343 && currentTime < 427 && 'item6') ||
+      (currentTime >= 428 && currentTime < 552 && 'item7') ||
+      (currentTime >= 553 && currentTime < 655 && 'item8') 
+    );
+  
+    if (itemId) {
+      if (this.activeItem && itemId === this.activeItem.id) {
+        return; 
+      }
+  
+      const clickedItem = this.listings.find(item => item.id === itemId);
+  
+      if (clickedItem) {
+        const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
+        if (previouslyClickedItem) {
+          previouslyClickedItem.classList.remove('clicked');
+        }
+        const newActiveItemElement = this.shadowRoot.querySelector(`[id="${clickedItem.id}"]`);
+        if (newActiveItemElement) {
+          newActiveItemElement.classList.add('clicked');
+        }this.activeItem = {
+          title: clickedItem.title,
+          id: clickedItem.id,
+          description: clickedItem.description,
+          metadata: clickedItem.metadata,
+        };
+  
+        this.timecode = clickedItem.metadata.timecode; 
+  
+        this.updateVideoPlayer();
+      }
+    }
   }
   
   
