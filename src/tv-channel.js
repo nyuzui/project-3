@@ -60,6 +60,13 @@ export class TvChannel extends LitElement {
         height: 150px; /* Set the desired expanded height */
       }
 
+      tv-channel.playing {
+        border: 10px solid #ffffff;
+        padding: 0px;
+        box-sizing: border-box;
+        border-radius: 15px;
+      }
+
     `;
   }
 

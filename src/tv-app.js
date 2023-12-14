@@ -174,41 +174,37 @@ export class TvApp extends LitElement {
   }
 
   itemClick(e) {
-    const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
-    if (previouslyClickedItem) {
-      previouslyClickedItem.classList.remove('clicked');
-    }
-  
-    e.target.classList.add('clicked');
-  
-    const clickedItem = this.listings.find((item) => item.id === e.target.id);
-  
-    this.activeItem = {
-      title: clickedItem.title,
-      id: clickedItem.id,
-      description: clickedItem.description,
-      metadata: clickedItem.metadata,
-    };
-  
-    this.timecode = clickedItem.metadata.timecode; // Update the timecode property
-  
-    this.updateVideoPlayer();
+  const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
+  if (previouslyClickedItem) {
+    previouslyClickedItem.classList.remove('clicked');
   }
+
+  e.target.classList.add('clicked');
+
+  const clickedItem = this.listings.find((item) => item.id === e.target.id);
+
+  this.activeItem = {
+    title: clickedItem.title,
+    id: clickedItem.id,
+    description: clickedItem.description,
+    metadata: clickedItem.metadata,
+  };
+
+  this.timecode = clickedItem.metadata.timecode; 
+
+  this.updateVideoPlayer();
+
+  e.target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
 
   updateVideoPlayer() {
     const videoPlayer = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player');
-
-    // Set the video source based on the active item's metadata
     videoPlayer.source = this.activeItem.metadata.source;
-
-    // Play the video
     videoPlayer.play();
-
-    // Seek to a specific time (e.g., the time specified in metadata)
     videoPlayer.seek(this.activeItem.metadata.timecode);
   }
 
-  // LitElement life cycle for when any property changes
   updated(changedProperties) {
     if (super.updated) {
       super.updated(changedProperties);
@@ -227,6 +223,7 @@ export class TvApp extends LitElement {
       }
     });
   }
+
   updateActiveItem(index) {
     const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
     if (previouslyClickedItem) {
@@ -243,6 +240,7 @@ export class TvApp extends LitElement {
     this.activeItem = newActiveItem;
     this.updateVideoPlayer();
   }
+
   handleVideoTimeUpdate(e) {
     const currentTime = e.detail.currentTime;
     const activeChannel = this.listings.find((channel) => {
@@ -271,19 +269,18 @@ export class TvApp extends LitElement {
   }
   
   selectChannelByIndex(index) {
-    // Select the channel by index
-    this.listings.forEach(item => item.selected = false); // Deselect all channels
-    this.listings[index].selected = true; // Select the channel at the specified index
+    this.listings.forEach(item => item.selected = false); 
+    this.listings[index].selected = true; 
     this.activeItem = this.listings[index];
-    this.selectedIndex = index; // Update the selected index
+    this.selectedIndex = index; 
     this.updateVideoPlayer();
   }
   
   showNext() {
     const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
     const nextIndex = (currentIndex + 1) % this.listings.length;
-    this.listings.forEach(item => item.selected = false); // Deselect all channels
-    this.listings[nextIndex].selected = true; // Select the next channel
+    this.listings.forEach(item => item.selected = false); 
+    this.listings[nextIndex].selected = true;
     this.activeItem = this.listings[nextIndex];
     this.updateVideoPlayer();
     this.selectChannelByIndex(previousIndex);
@@ -292,8 +289,8 @@ export class TvApp extends LitElement {
   showPrevious() {
     const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
     const previousIndex = (currentIndex - 1 + this.listings.length) % this.listings.length;
-    this.listings.forEach(item => item.selected = false); // Deselect all channels
-    this.listings[previousIndex].selected = true; // Select the previous channel
+    this.listings.forEach(item => item.selected = false);
+    this.listings[previousIndex].selected = true; // 
     this.activeItem = this.listings[previousIndex];
     this.updateVideoPlayer();
     this.selectChannelByIndex(previousIndex);
