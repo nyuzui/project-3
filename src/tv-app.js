@@ -24,6 +24,8 @@ export class TvApp extends LitElement {
       description: null,
       metadata: {},
     };
+    this.selectedIndex = 0; // Added property to keep track of the selected index
+    this.videoStarted = false;
   }
 
   // convention I enjoy using to define the tag's name
@@ -115,13 +117,13 @@ export class TvApp extends LitElement {
       <div class="container">
         <div class="video-container">
           <div>
-          <video-player id="videoPlayer"
-            source="https://www.youtube.com/watch?v=vwqi9s2XSG8"
-            accent-color="#C6AC8F"
+            <video-player id="video1" 
+            source="https://www.youtube.com/watch?v=vwqi9s2XSG8" 
+            accent-color="#C6AC8F" 
             dark track="https://haxtheweb.org/files/HAXshort.vtt"
-            @time-updated="${this.handleVideoTimeUpdate}">
+            @time-updated="${this.handleVideoTimeUpdate}"
+            @click="${this.handleVideoClick}"> <!-- Added click event for video -->
           </video-player>
-
           </div>
 
           <div class="controls-container">
@@ -225,52 +227,6 @@ export class TvApp extends LitElement {
       }
     });
   }
-  
-  handleVideoTimeUpdate(e) {
-    const currentTime = e.detail.currentTime;
-
-    // Find the channel with the corresponding time range
-    const activeChannel = this.listings.find((channel) => {
-      const [start, end] = channel.timerange;
-      return currentTime >= start && currentTime <= end;
-    });
-
-    if (activeChannel) {
-      this.activeItem = {
-        title: activeChannel.title,
-        id: activeChannel.id,
-        description: activeChannel.description,
-        metadata: activeChannel.metadata,
-      };
-    }
-    this.dispatchEvent(new CustomEvent('tv-channel-clicked', {
-      detail: {
-        metadata: this.metadata,
-      },
-    }));
-    
-  }
-
-  showNext() {
-    const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
-    const nextIndex = (currentIndex + 1) % this.listings.length;
-    this.listings.forEach(item => item.selected = false); // Deselect all channels
-    this.listings[nextIndex].selected = true; // Select the next channel
-    this.activeItem = this.listings[nextIndex];
-    this.updateVideoPlayer();
-  }
-
-  showPrevious() {
-    const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
-    const previousIndex = (currentIndex - 1 + this.listings.length) % this.listings.length;
-    this.listings.forEach(item => item.selected = false); // Deselect all channels
-    this.listings[previousIndex].selected = true; // Select the previous channel
-    this.activeItem = this.listings[previousIndex];
-    this.updateVideoPlayer();
-  }
-
-  
-
   updateActiveItem(index) {
     const previouslyClickedItem = this.shadowRoot.querySelector('.clicked');
     if (previouslyClickedItem) {
@@ -287,19 +243,64 @@ export class TvApp extends LitElement {
     this.activeItem = newActiveItem;
     this.updateVideoPlayer();
   }
-  firstUpdated() {
-    const videoPlayer = this.shadowRoot.getElementById('videoPlayer');
-  
-    this.addEventListener('tv-channel-clicked', (e) => {
-      const clickedMetadata = e.detail.metadata;
-      const activeChannel = this.listings.find((channel) => channel.metadata === clickedMetadata);
-  
-      if (activeChannel) {
-        this.selectChannel(activeChannel.id);
-        videoPlayer.seek(activeChannel.metadata.timecode);
-      }
+  handleVideoTimeUpdate(e) {
+    const currentTime = e.detail.currentTime;
+    const activeChannel = this.listings.find((channel) => {
+      const [start, end] = channel.timerange;
+      return currentTime >= start && currentTime <= end;
     });
+
+    if (activeChannel) {
+      this.activeItem = {
+        title: activeChannel.title,
+        id: activeChannel.id,
+        description: activeChannel.description,
+        metadata: activeChannel.metadata,
+      };
+    }
+  }
+ 
+  handleVideoClick() {
+    const videoPlayer = this.shadowRoot.querySelector('video-player');
+  
+    if (videoPlayer.paused) {
+      this.selectChannelByIndex(this.selectedIndex);
+    } else {
+      videoPlayer.pause();
+    }
   }
   
+  selectChannelByIndex(index) {
+    // Select the channel by index
+    this.listings.forEach(item => item.selected = false); // Deselect all channels
+    this.listings[index].selected = true; // Select the channel at the specified index
+    this.activeItem = this.listings[index];
+    this.selectedIndex = index; // Update the selected index
+    this.updateVideoPlayer();
+  }
+  
+  showNext() {
+    const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
+    const nextIndex = (currentIndex + 1) % this.listings.length;
+    this.listings.forEach(item => item.selected = false); // Deselect all channels
+    this.listings[nextIndex].selected = true; // Select the next channel
+    this.activeItem = this.listings[nextIndex];
+    this.updateVideoPlayer();
+    this.selectChannelByIndex(previousIndex);
+  }
+
+  showPrevious() {
+    const currentIndex = this.listings.findIndex(item => item.id === this.activeItem.id);
+    const previousIndex = (currentIndex - 1 + this.listings.length) % this.listings.length;
+    this.listings.forEach(item => item.selected = false); // Deselect all channels
+    this.listings[previousIndex].selected = true; // Select the previous channel
+    this.activeItem = this.listings[previousIndex];
+    this.updateVideoPlayer();
+    this.selectChannelByIndex(previousIndex);
+  }
+  
+  
+
+
 }
 customElements.define(TvApp.tag, TvApp);
